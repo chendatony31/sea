@@ -1,0 +1,35 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: SeascapeNft
+    network: bsc
+    source:
+      address: "0xc54b96b04aa8828b63cf250408e1084e9f6ac6c8"
+      abi: SeascapeNft
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.2
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - ApprovalForAll
+        - Minted
+        - OwnershipTransferred
+        - Transfer
+      abis:
+        - name: SeascapeNft
+          file: ./abis/SeascapeNft.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: Minted(indexed address,indexed uint256,uint256,uint8)
+          handler: handleMinted
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts

@@ -1,0 +1,16 @@
+{
+  "name": "sea",
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ chendatony31/sea",
+    "create-local": "graph create --node http://localhost:8020/ chendatony31/sea",
+    "remove-local": "graph remove --node http://localhost:8020/ chendatony31/sea",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 chendatony31/sea"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.20.0",
+    "@graphprotocol/graph-ts": "0.20.0"
+  }
+}
