@@ -1,6 +1,6 @@
 specVersion: 0.0.2
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum/contract
     name: SeascapeNft
@@ -17,7 +17,7 @@ dataSources:
         - NFT
       abis:
         - name: SeascapeNft
-          file: ./abis/SeascapeNft.json
+          file: SeascapeNft/abis/SeascapeNft.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,indexed uint256)
           handler: handleApproval
@@ -29,4 +29,4 @@ dataSources:
           handler: handleOwnershipTransferred
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/mapping.ts
+      file: SeascapeNft/SeascapeNft.wasm
