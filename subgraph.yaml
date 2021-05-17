@@ -8,13 +8,15 @@ dataSources:
     source:
       address: "0xc54b96b04aa8828b63cf250408e1084e9f6ac6c8"
       abi: SeascapeNft
-      startBlock: 5189615
+      startBlock: 5189614
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - NFT
+        - Nft
+        - Transaction
+        - Transfer
       abis:
         - name: SeascapeNft
           file: ./abis/SeascapeNft.json

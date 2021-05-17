@@ -14,7 +14,9 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - NFT
+        - Nft
+        - Transaction
+        - Transfer
       abis:
         - name: SeascapeNft
           file: SeascapeNft/abis/SeascapeNft.json

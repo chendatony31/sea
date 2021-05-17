@@ -12,26 +12,25 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class NFT extends Entity {
+export class Nft extends Entity {
   constructor(id: string) {
     super();
-    this.set('id', Value.fromString(id));
+    this.set("id", Value.fromString(id));
   }
-
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save NFT entity without an ID");
+    assert(id !== null, "Cannot save Nft entity without an ID");
     assert(
       id.kind == ValueKind.STRING,
-      "Cannot save NFT entity with non-string ID. " +
+      "Cannot save Nft entity with non-string ID. " +
         'Considering using .toHex() to convert the "id" to a string.'
     );
-    store.set("NFT", id.toString(), this);
+    store.set("Nft", id.toString(), this);
   }
 
-  static load(id: string): NFT | null {
-    return store.get('NFT', id) as NFT | null;
+  static load(id: string): Nft | null {
+    return store.get("Nft", id) as Nft | null;
   }
 
   get id(): string {
@@ -49,6 +48,148 @@ export class NFT extends Entity {
   }
 
   set owner(value: Bytes) {
-    this.set('owner', Value.fromBytes(value));
+    this.set("owner", Value.fromBytes(value));
+  }
+}
+
+export class Transaction extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save Transaction entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save Transaction entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("Transaction", id.toString(), this);
+  }
+
+  static load(id: string): Transaction | null {
+    return store.get("Transaction", id) as Transaction | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
+    return value.toBigInt();
+  }
+
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    return value.toBigInt();
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
+
+  get transfer(): Array<string | null> {
+    let value = this.get("transfer");
+    return value.toStringArray();
+  }
+
+  set transfer(value: Array<string | null>) {
+    this.set("transfer", Value.fromStringArray(value));
+  }
+}
+
+export class Transfer extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save Transfer entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save Transfer entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("Transfer", id.toString(), this);
+  }
+
+  static load(id: string): Transfer | null {
+    return store.get("Transfer", id) as Transfer | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    return value.toBigInt();
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
+
+  get from(): Bytes {
+    let value = this.get("from");
+    return value.toBytes();
+  }
+
+  set from(value: Bytes) {
+    this.set("from", Value.fromBytes(value));
+  }
+
+  get to(): Bytes {
+    let value = this.get("to");
+    return value.toBytes();
+  }
+
+  set to(value: Bytes) {
+    this.set("to", Value.fromBytes(value));
+  }
+
+  get logIndex(): BigInt | null {
+    let value = this.get("logIndex");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set logIndex(value: BigInt | null) {
+    if (value === null) {
+      this.unset("logIndex");
+    } else {
+      this.set("logIndex", Value.fromBigInt(value as BigInt));
+    }
+  }
+
+  get tokenId(): string {
+    let value = this.get("tokenId");
+    return value.toString();
+  }
+
+  set tokenId(value: string) {
+    this.set("tokenId", Value.fromString(value));
   }
 }

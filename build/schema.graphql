@@ -1,4 +1,20 @@
-type NFT @entity {
+type Nft @entity {
   id: ID!
   owner: Bytes! # address
+}
+
+type Transaction @entity {
+  id: ID! # transaction hash
+  blockNumber: BigInt!
+  timestamp: BigInt!
+  transfer: [Transfer]!
+}
+
+type Transfer @entity {
+  id: ID! # hash + index
+  timestamp: BigInt!
+  from: Bytes!
+  to: Bytes!
+  logIndex: BigInt
+  tokenId: ID!
 }
